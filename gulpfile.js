@@ -135,3 +135,32 @@ gulp.task('build', cb =>
 );
 
 gulp.task('start', cb => sequence('build', 'serve', 'watch'));
+
+//my tasks
+
+gulp.task('babel', () =>
+  gulp.src('./src/js/scripts.min.js')
+  .pipe(gulp.dest('./dist'))
+  .pipe(babel({
+    presets: ['env']
+}))
+.pipe(gulp.dest('dist'))
+);
+
+gulp.task('concat', () =>{
+return gulp.src(['./src/js/scripts.min.js', './src/js/main.js'])
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest());
+});
+
+gulp.task('uglify',  () =>{
+       gulp.src('./dist/scripts.min.js')
+       .pipe(uglify())
+       .pipe(gulp.dest('./dist/'))
+  });
+ 
+
+
+
+
+
